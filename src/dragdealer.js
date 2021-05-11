@@ -927,6 +927,10 @@ var StylePrefix = {
 };
 
 function getPrefixedStylePropName(propName) {
+  if (typeof document === 'undefined') {
+    return null
+  }
+
   var domPrefixes = 'Webkit Moz ms O'.split(' '),
       elStyle = document.documentElement.style;
   if (elStyle[propName] !== undefined) return propName; // Is supported unprefixed
@@ -946,8 +950,8 @@ function triggerWebkitHardwareAcceleration(element) {
 };
 
 var vendors = ['webkit', 'moz'];
-var requestAnimationFrame = window.requestAnimationFrame;
-var cancelAnimationFrame = window.cancelAnimationFrame;
+var requestAnimationFrame = typeof window === 'undefined' ? () => {} : window.requestAnimationFrame;
+var cancelAnimationFrame = typeof window === 'undefined' ? () => {} : window.cancelAnimationFrame;
 
 for (var x = 0; x < vendors.length && !requestAnimationFrame; ++x) {
   requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
