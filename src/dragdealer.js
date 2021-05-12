@@ -950,8 +950,8 @@ function triggerWebkitHardwareAcceleration(element) {
 };
 
 var vendors = ['webkit', 'moz'];
-var requestAnimationFrame = typeof window === 'undefined' ? () => {} : window.requestAnimationFrame;
-var cancelAnimationFrame = typeof window === 'undefined' ? () => {} : window.cancelAnimationFrame;
+var requestAnimationFrame = typeof window === 'undefined' ? function () {} : window.requestAnimationFrame;
+var cancelAnimationFrame = typeof window === 'undefined' ? function () {} : window.cancelAnimationFrame;
 
 for (var x = 0; x < vendors.length && !requestAnimationFrame; ++x) {
   requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
